@@ -1,3 +1,5 @@
+<img width="250px" src="https://neon.tech/brand/neon-logo-dark-color.svg" />
+
 # Neon Authorize + Supertokens Demo (SQL from the backend)
 
 This demo aims to show off Supertokens and Neon Authorize together. In particular this shows how you can use Neon Authorize to run Drizzle queries from your backend!
