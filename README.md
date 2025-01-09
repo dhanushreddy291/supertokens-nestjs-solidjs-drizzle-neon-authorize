@@ -4,7 +4,7 @@
 
 A demo showcasing the integration of Supertokens for authentication and Neon Authorize for secure backend data access with Drizzle ORM in a NestJS and SolidJS application. This example demonstrates how to use Neon Authorize to enforce row-level security policies when querying your Neon database from the backend.
 
-## Features
+## The Stack
 
 - NestJS backend for API development
 - SolidJS frontend for a reactive user interface
