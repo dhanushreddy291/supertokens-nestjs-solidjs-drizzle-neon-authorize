@@ -13,6 +13,7 @@ export const appInfo = {
 };
 
 export const connectionUri = process.env.SUPERTOKENS_URI;
+export const apiKey = process.env.SUPERTOKENS_API_KEY;
 
 export const recipeList = [
   ThirdParty.init({

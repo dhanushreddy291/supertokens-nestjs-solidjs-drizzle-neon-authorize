@@ -1,31 +1,128 @@
 <img width="250px" src="https://neon.tech/brand/neon-logo-dark-color.svg" />
 
-# Neon Authorize + Supertokens Demo (SQL from the backend)
+# Neon Authorize + Supertokens Example (SQL from the Backend)
 
-This demo aims to show off Supertokens and Neon Authorize together. In particular this shows how you can use Neon Authorize to run Drizzle queries from your backend!
+A demo showcasing the integration of Supertokens for authentication and Neon Authorize for secure backend data access with Drizzle ORM in a NestJS and SolidJS application. This example demonstrates how to use Neon Authorize to enforce row-level security policies when querying your Neon database from the backend.
 
 ## The Stack
 
-- Drizzle ORM
-- Nest.js
-- Solid.js
+- NestJS backend for API development
+- SolidJS frontend for a reactive user interface
+- User authentication powered by Supertokens
+- Row-level security using Neon Authorize
+- Database interactions with Drizzle ORM
 
-## Setup
+## Prerequisites
 
-🚨🚨🚨 FOLLOWING THESE STEPS WILL EXPOSE YOUR LOCALHOST BACKEND API ON THE PUBLIC INTERNET 🚨🚨🚨
+- [Neon](https://neon.tech) account with a new project
+- [Supertokens](https://supertokens.com) account
+- Node.js installed locally
 
-Supertokens exposes your JWKS URL via your localhost which means we need to expose that so Neon can request it. But keep in mind that your backend will be exposted on the public Internet as long as the localtunnel process is running.
+> **Important**: This setup uses `localtunnel` to expose your local backend API for Neon Authorize configuration. **Be aware that your backend will be publicly accessible as long as the tunnel is active.** Remember to shut down the tunnel when you are finished.
 
-1. Clone this repo
-2. Sign up and create a new database on [Neon.tech](https://neon.tech).
-3. Choose AWS for the cloud
-4. Sign up for [Supertokens](https://supertokens.com).
-5. Get your Supertokens Core connectionURI and Core API key. Put these in backend/.env.
-6. Run npm install in the root directory, frontend, and backend directory (you need to run npm install three times).
-7. Run `npm run start`. This will start the backend, frontend, and tunnel.
-8. This will pop up both your frontend and another for your tunnel. On the tunnel page, go through the instructions to set up tunnel (you'll have to click a link and copy/paste a code.)
-9.  Once you have done that, copy/paste the JWKS URL from your commandline and navigate to the Authorize tab in the Neon Console. Click Add Provider and copy/paste that JWKS URL into the text field, the correct provider will be chosen automatically.
-10. From the get started drawer that pops out (which you can get back to from the Neon Authorize page later if you close it) – run all the blocks under Setup Roles header.
-11. From the "Setup Environment Variables" heading, copy the authenticated URL and paste that into your backend/.env/. Notice this connection string has no password.
-12. You also need to copy/paste the DATABASE_URL from the dashboard that does have the full password. You'll end up with two Postgres connection strings in you backend .env file.
-13. Run `npm run migrate` from your backend directory.
+## Local Development Setup
+
+### Supertokens Setup
+
+1. Sign up or log in to your [Supertokens dashboard](https://supertokens.com/dashboard-saas).
+2. Create a new project.
+3. Obtain your **Core URI** and **API Key** from the Supertokens dashboard.
+   ![Supertoken Core URI and API Key](./images/supertokens-core-uri-api-key.png)
+
+### Local Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-authorize
+   cd supertokens-nestjs-solidjs-drizzle-neon-authorize
+   ```
+
+2. Install dependencies for the frontend, backend and localtunnel:
+
+   ```bash
+   npm i && cd backend && npm i && cd ../frontend && npm i && cd ..
+   ```
+
+3. Create `.env` file in the `backend` directory with the following variables:
+
+   ```bash
+   cp backend/.env.example backend/.env
+   ```
+
+   ```env
+   SUPERTOKENS_URI=<YOUR_SUPERTOKENS_CORE_URI>
+   SUPERTOKENS_API_KEY=<YOUR_SUPERTOKENS_CORE_API_KEY>
+   DATABASE_URL="" # Leave this empty for now
+   DATABASE_AUTHENTICATED_URL="" # Leave this empty for now
+   ```
+
+4. Start the services:
+
+   ```bash
+   npm run start
+   ```
+
+   This command will start the frontend, backend, and the `localtunnel` service.
+
+5. **Copy JWKS URL**
+
+   - Once the `npm run start` command is running, a `localtunnel` URL will be generated and displayed in your terminal, along with the Supertokens JWKS URL.
+     ![Localtunnel JWKS URL](./images/localtunnel-jwks-url.png)
+   - Copy this JWKS URL.
+   - Return to the "Authorize" section in your Neon Console.
+   - Paste the copied JWKS URL into the "JWKS URL" field when adding a new authentication provider
+     ![Neon Authorize JWKS URL](./images/neon-authorize-jwks-url.png)
+   - Follow the steps in the UI to setup the roles for Neon Authorize. You should ignore the schema related steps if you're following this guide.
+   - Note down the connection strings for both the **`neondb_owner` role** and the **`authenticated, passwordless` role**. You'll need both. The `neondb_owner` role has full privileges and is used for migrations, while the `authenticated` role will be used by the application and will have its access restricted by RLS.
+     ![Neon Authorize Connection Strings](./images/neon-authorize-env-values.png)
+
+6. Stop the services by pressing `Ctrl + C` in the terminal.
+
+7. Update the `.env` file in the `backend` directory to include the connection strings:
+
+   ```env
+   SUPERTOKENS_URI=<YOUR_SUPERTOKENS_CORE_URI>
+   SUPERTOKENS_API_KEY=<YOUR_SUPERTOKENS_CORE_API_KEY>
+   DATABASE_URL=<YOUR_NEON_DATABASE_URL_WITH_PASSWORD>
+   DATABASE_AUTHENTICATED_URL=<YOUR_NEON_DATABASE_AUTHENTICATED_URL>
+   ```
+
+8. **Apply Database Migrations:**
+
+   ```bash
+   cd backend
+   npm run drizzle:migrate
+   cd ..
+   ```
+
+9. Start the services again
+
+   ```bash
+   npm run start
+   ```
+
+   This command will start the frontend, backend, and the `localtunnel` service.
+
+10. Open your browser to `http://localhost:3000` to see the application running.
+    ![Application Screenshot](./images/application-screenshot.png)
+
+## Important: Production Setup
+
+> **Note**: Before deploying to production, ensure you transition your Supertokens project from development to live in the Supertokens dashboard. This will involve setting up the required DNS records for your domain. Update your environment variables in both the frontend and backend with your production Supertokens configuration.
+
+![Supertokens Production Setup](./images/supertokens-production-setup.png)
+
+## Learn More
+
+- [Neon Authorize Tutorial](https://neon.tech/docs/guides/neon-authorize-tutorial)
+- [Simplify RLS with Drizzle](https://neon.tech/docs/guides/neon-authorize-drizzle)
+- [Supertokens Documentation](https://supertokens.com/docs)
+
+## Authors
+
+- [Brian Holt](https://github.com/btholt)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
