@@ -1,15 +1,15 @@
 <img width="250px" src="https://neon.tech/brand/neon-logo-dark-color.svg" />
 
-# Neon Authorize + Supertokens Example (SQL from the Backend)
+# Neon RLS Authorize + Supertokens Example (SQL from the Backend)
 
-A demo showcasing the integration of Supertokens for authentication and Neon Authorize for secure backend data access with Drizzle ORM in a NestJS and SolidJS application. This example demonstrates how to use Neon Authorize to enforce row-level security policies when querying your Neon database from the backend.
+A demo showcasing the integration of Supertokens for authentication and Neon RLS Authorize for secure backend data access with Drizzle ORM in a NestJS and SolidJS application. This example demonstrates how to use Neon RLS Authorize to enforce row-level security policies when querying your Neon database from the backend.
 
 ## The Stack
 
 - NestJS backend for API development
 - SolidJS frontend for a reactive user interface
 - User authentication powered by Supertokens
-- Row-level security using Neon Authorize
+- Row-level security using Neon RLS Authorize
 - Database interactions with Drizzle ORM
 
 ## Prerequisites
@@ -18,7 +18,7 @@ A demo showcasing the integration of Supertokens for authentication and Neon Aut
 - [Supertokens](https://supertokens.com) account
 - Node.js installed locally
 
-> **Important**: This setup uses `localtunnel` to expose your local backend API for Neon Authorize configuration. **Be aware that your backend will be publicly accessible as long as the tunnel is active.** Remember to shut down the tunnel when you are finished.
+> **Important**: This setup uses `localtunnel` to expose your local backend API for Neon RLS Authorize configuration. **Be aware that your backend will be publicly accessible as long as the tunnel is active.** Remember to shut down the tunnel when you are finished.
 
 ## Local Development Setup
 
@@ -34,8 +34,8 @@ A demo showcasing the integration of Supertokens for authentication and Neon Aut
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-authorize
-   cd supertokens-nestjs-solidjs-drizzle-neon-authorize
+   git clone https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls-authorize
+   cd supertokens-nestjs-solidjs-drizzle-neon-rls-authorize
    ```
 
 2. Install dependencies for the frontend, backend and localtunnel:
@@ -70,7 +70,7 @@ A demo showcasing the integration of Supertokens for authentication and Neon Aut
    - Once the `npm run start` command is running, a `localtunnel` URL will be generated and displayed in your terminal, along with the Supertokens JWKS URL.
      ![Localtunnel JWKS URL](./images/localtunnel-jwks-url.png)
    - Copy this JWKS URL.
-   - Return to the "Authorize" section in your Neon Console.
+   - Return to the "RLS Authorize" section in your Neon Console (Project Settings).
    - Paste the copied JWKS URL into the "JWKS URL" field when adding a new authentication provider
      ![Neon Authorize JWKS URL](./images/neon-authorize-jwks-url.png)
    - Follow the steps in the UI to setup the roles for Neon Authorize. You should ignore the schema related steps if you're following this guide.
@@ -115,7 +115,7 @@ A demo showcasing the integration of Supertokens for authentication and Neon Aut
 
 ## Learn More
 
-- [Neon Authorize Tutorial](https://neon.tech/docs/guides/neon-authorize-tutorial)
+- [Neon RLS Authorize Tutorial](https://neon.tech/docs/guides/neon-authorize-tutorial)
 - [Simplify RLS with Drizzle](https://neon.tech/docs/guides/neon-authorize-drizzle)
 - [Supertokens Documentation](https://supertokens.com/docs)
 
