@@ -1,15 +1,15 @@
 <img width="250px" src="https://neon.tech/brand/neon-logo-dark-color.svg" />
 
-# Neon RLS Authorize + Supertokens Example (SQL from the Backend)
+# Neon RLS + Supertokens Example (SQL from the Backend)
 
-A demo showcasing the integration of Supertokens for authentication and Neon RLS Authorize for secure backend data access with Drizzle ORM in a NestJS and SolidJS application. This example demonstrates how to use Neon RLS Authorize to enforce row-level security policies when querying your Neon database from the backend.
+A demo showcasing the integration of Supertokens for authentication and Neon RLS for secure backend data access with Drizzle ORM in a NestJS and SolidJS application. This example demonstrates how to use Neon RLS to enforce row-level security policies when querying your Neon database from the backend.
 
 ## The Stack
 
 - NestJS backend for API development
 - SolidJS frontend for a reactive user interface
 - User authentication powered by Supertokens
-- Row-level security using Neon RLS Authorize
+- Row-level security using Neon RLS
 - Database interactions with Drizzle ORM
 
 ## Prerequisites
@@ -18,7 +18,7 @@ A demo showcasing the integration of Supertokens for authentication and Neon RLS
 - [Supertokens](https://supertokens.com) account
 - Node.js installed locally
 
-> **Important**: This setup uses `localtunnel` to expose your local backend API for Neon RLS Authorize configuration. **Be aware that your backend will be publicly accessible as long as the tunnel is active.** Remember to shut down the tunnel when you are finished.
+> **Important**: This setup uses `localtunnel` to expose your local backend API for Neon RLS configuration. **Be aware that your backend will be publicly accessible as long as the tunnel is active.** Remember to shut down the tunnel when you are finished.
 
 ## Local Development Setup
 
@@ -34,8 +34,8 @@ A demo showcasing the integration of Supertokens for authentication and Neon RLS
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls-authorize
-   cd supertokens-nestjs-solidjs-drizzle-neon-rls-authorize
+   git clone https://github.com/neondatabase-labs/supertokens-nestjs-solidjs-drizzle-neon-rls
+   cd supertokens-nestjs-solidjs-drizzle-neon-rls
    ```
 
 2. Install dependencies for the frontend, backend and localtunnel:
@@ -70,12 +70,12 @@ A demo showcasing the integration of Supertokens for authentication and Neon RLS
    - Once the `npm run start` command is running, a `localtunnel` URL will be generated and displayed in your terminal, along with the Supertokens JWKS URL.
      ![Localtunnel JWKS URL](./images/localtunnel-jwks-url.png)
    - Copy this JWKS URL.
-   - Return to the "RLS Authorize" section in your Neon Console (Project Settings).
+   - Return to the "RLS" section in your Neon Console (Project Settings).
    - Paste the copied JWKS URL into the "JWKS URL" field when adding a new authentication provider
-     ![Neon Authorize JWKS URL](./images/neon-authorize-jwks-url.png)
-   - Follow the steps in the UI to setup the roles for Neon Authorize. You should ignore the schema related steps if you're following this guide.
+     ![Neon RLS JWKS URL](./images/neon-rls-jwks-url.png)
+   - Follow the steps in the UI to setup the roles for Neon RLS. You should ignore the schema related steps if you're following this guide.
    - Note down the connection strings for both the **`neondb_owner` role** and the **`authenticated, passwordless` role**. You'll need both. The `neondb_owner` role has full privileges and is used for migrations, while the `authenticated` role will be used by the application and will have its access restricted by RLS.
-     ![Neon Authorize Connection Strings](./images/neon-authorize-env-values.png)
+     ![Neon RLS Connection Strings](./images/neon-rls-env-values.png)
 
 6. Stop the services by pressing `Ctrl + C` in the terminal.
 
@@ -115,8 +115,8 @@ A demo showcasing the integration of Supertokens for authentication and Neon RLS
 
 ## Learn More
 
-- [Neon RLS Authorize Tutorial](https://neon.tech/docs/guides/neon-authorize-tutorial)
-- [Simplify RLS with Drizzle](https://neon.tech/docs/guides/neon-authorize-drizzle)
+- [Neon RLS Tutorial](https://neon.tech/docs/guides/neon-rls-tutorial)
+- [Simplify RLS with Drizzle](https://neon.tech/docs/guides/neon-rls-drizzle)
 - [Supertokens Documentation](https://supertokens.com/docs)
 
 ## Authors
